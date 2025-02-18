@@ -6,7 +6,7 @@ class Board
   end
 
   def play(col, player)
-    return false if col < 0 || col >= @board.size
+    return false if col.negative? || col >= @board.size
     return false if @board[col].all? { |cell| cell != ' ' }
 
     row = @board[col].rindex(' ')
@@ -24,11 +24,26 @@ class Board
     end
   end
 
-  def draw?
+  def winner?
+    horizontal_winner? || vertical_winner?
+  end
+
+  private
+
+  def all_same?(arr)
+    arr.uniq.size == 1 && arr.first != ' '
+  end
+
+  def horizontal_winner?
+    (0..5).each do |row|
+      (0..3).each do |col|
+        return true if all_same?([@board[col][row], @board[col+1][row], @board[col+2][row], @board[col+3][row]])
+      end
+    end
     false
   end
 
-  def winner? 
+  def draw?
     false
   end
 end

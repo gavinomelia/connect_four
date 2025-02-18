@@ -37,4 +37,12 @@ RSpec.describe Board do
       expect(board.play(0, 'O')).to be_falsey
     end
   end
+
+  describe 'winning' do
+    it 'detects a horizontal win' do
+      4.times { |i| board.play(i, 'X') }
+      board.display
+      expect(board.winner?).to eq(true) 
+    end
+  end
 end

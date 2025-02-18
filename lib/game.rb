@@ -1,5 +1,6 @@
 require_relative 'board'
 
+# Game handles UI and turns.
 class Game
   def initialize
     @board = Board.new

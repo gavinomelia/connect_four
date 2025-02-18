@@ -1,3 +1,5 @@
+# Board handles rules (such as determining if there is a winner or draw).
+# It also keeps the state of the board and handles displaying said board.
 class Board
   attr_accessor :board
 

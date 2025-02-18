@@ -1,5 +1,5 @@
 # Board handles rules (such as determining if there is a winner or draw).
-# It also keeps the state of the board and handles displaying said board.
+# It also keeps the state of the board and handles displaying the board.
 class Board
   attr_accessor :board
 
@@ -17,7 +17,7 @@ class Board
   end
 
   def draw?
-    false
+    @board.all? { |col| col.none? { |cell| cell == ' ' } }
   end
 
   def display

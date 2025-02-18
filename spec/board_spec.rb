@@ -37,6 +37,25 @@ RSpec.describe Board do
     end
   end
 
+  describe '#draw?' do
+  it 'returns true if the board is full and there is no winner' do
+    (0..6).each do |col|
+    6.times { board.play(col, col.even? ? 'X' : 'O') }
+    end
+    expect(board.draw?).to eq(true)
+  end
+
+  it 'returns false if the board is not full' do
+    board.play(0, 'X')
+    expect(board.draw?).to eq(false)
+  end
+
+  it 'returns false if there is a winner' do
+    4.times { |i| board.play(i, 'X') }
+    expect(board.draw?).to eq(false)
+  end
+  end
+
   describe '#winner?' do
     it 'detects a horizontal win' do
       4.times { |i| board.play(i, 'X') }

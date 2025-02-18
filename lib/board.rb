@@ -43,6 +43,15 @@ class Board
     false
   end
 
+  def vertical_winner?
+    @board.each do |col|
+      col.each_cons(4) do |four_in_col|
+        return true if all_same?(four_in_col)
+      end
+    end
+    false
+  end
+
   def draw?
     false
   end

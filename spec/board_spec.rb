@@ -27,7 +27,6 @@ RSpec.describe Board do
     it 'stacks player marks in the same column' do
       board.play(0, 'X')
       board.play(0, 'O')
-      board.display
       expect(board.board[0][5]).to eq('X')
       expect(board.board[0][4]).to eq('O')
     end
@@ -38,10 +37,14 @@ RSpec.describe Board do
     end
   end
 
-  describe 'winning' do
+  describe '#winner?' do
     it 'detects a horizontal win' do
       4.times { |i| board.play(i, 'X') }
-      board.display
+      expect(board.winner?).to eq(true) 
+    end
+
+    it 'detects a vertical win' do
+      4.times { board.play(1, 'X') }
       expect(board.winner?).to eq(true) 
     end
   end

@@ -47,5 +47,35 @@ RSpec.describe Board do
       4.times { board.play(1, 'X') }
       expect(board.winner?).to eq(true) 
     end
+
+    it 'detects a diagonal win with positive slope' do
+      board.play(0, 'X')
+      board.play(1, 'O')
+      board.play(1, 'X')
+      board.play(2, 'O')
+      board.play(2, 'O')
+      board.play(2, 'X')
+      board.play(3, 'O')
+      board.play(3, 'O')
+      board.play(3, 'O')
+      board.play(3, 'X')
+      board.display
+      expect(board.winner?).to eq(true)
+    end
+
+    it 'detects a diagonal win with negative slope' do
+      board.play(3, 'X')
+      board.play(2, 'O')
+      board.play(2, 'X')
+      board.play(1, 'O')
+      board.play(1, 'O')
+      board.play(1, 'X')
+      board.play(0, 'O')
+      board.play(0, 'O')
+      board.play(0, 'O')
+      board.play(0, 'X')
+      board.display
+      expect(board.winner?).to eq(true)
+    end
   end
 end

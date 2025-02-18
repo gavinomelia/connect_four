@@ -14,6 +14,10 @@ class Board
     true
   end
 
+  def draw?
+    false
+  end
+
   def display
     puts "\n0 1 2 3 4 5 6"
     (0..5).each do |row|
@@ -25,7 +29,7 @@ class Board
   end
 
   def winner?
-    horizontal_winner? || vertical_winner?
+    horizontal_winner? || vertical_winner? || diagonal_winner?
   end
 
   private
@@ -52,7 +56,18 @@ class Board
     false
   end
 
-  def draw?
+  # Iterates through possible starting positions on the board and checks for four consecutive
+  # pieces of the same type in both diagonal directions (bottom-left to top-right and top-left to bottom-right).
+  def diagonal_winner?
+    # Only need to check diagonals starting in columns 0..3 because anything higher would end out-of-bounds.
+    (0..3).each do |col|
+      (0..2).each do |row|
+        # bottom-left to top-right
+        return true if all_same?([@board[col][row], @board[col+1][row+1], @board[col+2][row+2], @board[col+3][row+3]])
+        # top-left to bottom-right 
+        return true if all_same?([@board[col][row+3], @board[col+1][row+2], @board[col+2][row+1], @board[col+3][row]])
+      end
+    end
     false
   end
 end

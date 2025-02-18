@@ -1,4 +1,3 @@
-require 'spec_helper'
 require_relative 'board'
 
 class Game
@@ -10,7 +9,7 @@ class Game
   def start
     puts 'Welcome to Connect 4. Alternate moves until one player gets four pieces in a row or all spaces are filled.'
     play_turn until @board.winner? || @board.draw?
-    # end_game
+    end_game
   end
 
   def play_turn
@@ -24,15 +23,15 @@ class Game
     switch_player
   end
 
-  # def end_game
-  #   @board.display
-  #   switch_player # switch back to the winning player
-  #   if @board.winner?
-  #     puts "Player #{@current_player} wins"
-  #   else
-  #     puts 'The game is a draw! Bummer. Try again.'
-  #   end
-  # end
+  def end_game
+    @board.display
+    switch_player # switch back to the winning player
+    if @board.winner?
+      puts "Player #{@current_player} wins!"
+    else
+      puts 'The game is a draw! Bummer. Try again.'
+    end
+  end
 
   private
 
